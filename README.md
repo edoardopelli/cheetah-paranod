@@ -1,5 +1,5 @@
 # cheetah-paranod
-PARANOD - # P.A.R.A.N.O.D. Project
+PARANOD - Pom.xml Analyzer and Neo4j Dependencies Organizer
 
 ## Description
 
