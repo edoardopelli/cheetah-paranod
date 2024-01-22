@@ -3,11 +3,12 @@ package org.cheetah.paranod.neo4j;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.data.neo4j.core.schema.Relationship.Direction;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -19,6 +20,7 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Artifact {
 
 	@Id
@@ -38,4 +40,7 @@ public class Artifact {
 	@Relationship(type = "USED_BY",direction = Direction.INCOMING)
 	@JsonProperty(access = Access.WRITE_ONLY)
 	Set<Artifact> usedBy = new HashSet<>();
+	
+	@Relationship(type = "HAS_PARENT",direction = Direction.OUTGOING)
+	private ParentPom parent;
 }
